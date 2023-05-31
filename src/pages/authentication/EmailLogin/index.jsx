@@ -1,6 +1,8 @@
 import { Box, Button, Container, FormGroup, TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import useHttpReq from "../../../hooks/useHttpReq";
+import { useContext } from "react";
+import AuthContext from "../../../context/AuthContext/context";
 // import loginAPI from "../../../api/authentication/login";
 
 const EmailLogin = () => {
@@ -10,6 +12,10 @@ const EmailLogin = () => {
     formState: { errors },
   } = useForm();
 
+  const { loggedIn, setIsLoggedIn } = useContext(AuthContext);
+
+  console.log(loggedIn);
+
   const { request, isLoading } = useHttpReq({
     method: "post",
     path: "/login",
@@ -18,10 +24,11 @@ const EmailLogin = () => {
   const onSubmit = async (values) => {
     const { data: res, error } = await request({ body: values });
 
-    // if (error || !res) console.log(res, error);
+    if (error || !res) console.log(res, error);
 
-    // if (res.type === "error") console.log(res);
+    if (res.type === "error") console.log(res);
 
+    setIsLoggedIn(true);
     console.log(res);
   };
 
