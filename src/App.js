@@ -1,14 +1,15 @@
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import AuthProvider from "./context/AuthContext/provider";
-import EmailLogin from "./pages/authentication/EmailLogin";
+import Router from "./router";
 
 function App() {
   return (
-    <AuthProvider>
-      <div className="App">
-        <EmailLogin />
-      </div>
-    </AuthProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <Router />
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 
